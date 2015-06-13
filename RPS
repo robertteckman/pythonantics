@@ -1,0 +1,67 @@
+
+#/r/beginnerprojects
+
+#Rock Paper Scissors Challenge
+#June 10, 2015
+
+import random
+
+print("Welcome to the RPS Challenge!")
+print("Please enter your name.")
+username = input("> ")
+
+print("Hi %s! We will play a best of three to determine a winner." % username)
+
+options = ['R', 'P', 'S']
+playerscore = 0
+compscore = 0
+play1 = " "
+compplay1 = " "
+
+def prompt():
+	print("To choose Rock, type 'R', scissors, type 'S', or paper, type 'P'. CTRL-C to exit at any time.")
+	play1 = input("> ")
+	compplay1 = random.choice(options)
+	print("You have selected %s, and the computer has selected %s." % (play1, compplay1))
+	return play1, compplay1
+
+def winner(p, c):
+	if p == 'R':
+		if c == 'R':
+			print("Its a draw!")
+		elif c == 'S':
+			print("Rock beats scissors, you win!")
+			playerscore += 1
+			return playerscore
+		elif c == 'P':
+			print("Rock wrapped by paper, you lose.")
+			compscore += 1
+	elif p == 'S':
+		if c == 'S':
+			print("Its a draw!")
+		elif c == 'R':
+			print("Rock beats scissors, you lose.")
+			compscore += 1
+		elif c == 'P':
+			print("Scissors cut paper, you win!")
+			playerscore += 1
+	elif p == 'P':
+		if c == 'R':
+			print("Rock wrapped by paper, you win!")
+			playerscore += 1
+		elif c == 'S':
+			print("Scissors cut paper, you lose.")
+			compscore += 1
+		elif c == 'P':
+			print("Its a draw!")
+	
+print(prompt())
+print(winner(play1, compplay1))
+print("The score is currently %d for %s, and %d for the computer.\n" % (playerscore, username, compscore))
+
+
+if playerscore < 3 and compscore < 3:
+	print("On to the next round.\n")
+	print(prompt())
+else:
+	print("Game over! Final score: %d for %s and %d for the computer!" % (playerscore, username, compscore))
